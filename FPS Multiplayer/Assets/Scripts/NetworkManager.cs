@@ -2,14 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NetworkManager : MonoBehaviour {
+public class NetworkManager : Photon.MonoBehaviour {
 
 	public bool offlineMode = false;
 	public Camera OverviewCam; 
+
+	string remoteLayerName = "RemotePlayer";
 	SpawnSpot[] spawnSpots;
 	// Use this for initialization
 	void Start () {
 		spawnSpots = GameObject.FindObjectsOfType<SpawnSpot>();
+		//if(  ){
+//			Debug.Log("you joined");
+//			Debug.Log(photonView.isMine); //Need to fix for layers
+//			enableComponents();
+//			AssignRemoteLayer();	
+		//}
 		Connect();		
 	}
 
@@ -62,7 +70,16 @@ public class NetworkManager : MonoBehaviour {
 		GameObject myPlayer = (GameObject) PhotonNetwork.Instantiate("FPSController", mySpawnSpot.transform.position, mySpawnSpot.transform.rotation, 0);
 		myPlayer.GetComponentInChildren<Camera>().enabled = true; 
 		myPlayer.GetComponent<CharacterController>().enabled = true;	
+		myPlayer.GetComponentInChildren<Shooting>().enabled = true;
 		myPlayer.GetComponentInChildren<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
 		myPlayer.GetComponentInChildren<AudioListener>().enabled = true;
+	}
+
+	void enableComponents(){
+
+	}
+
+	void AssignRemoteLayer(){
+		gameObject.layer = LayerMask.NameToLayer (remoteLayerName);
 	}
 }

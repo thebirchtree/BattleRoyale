@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33597011239067566}
   - component: {fileID: 65950409011787092}
   - component: {fileID: 23158160365178410}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 20057683722200756}
   - component: {fileID: 81061251967683418}
   - component: {fileID: 124331245440216532}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FirstPersonCharacter
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -59,11 +59,12 @@ GameObject:
   - component: {fileID: 143018438892175118}
   - component: {fileID: 114432844167037768}
   - component: {fileID: 82844175579225234}
-  - component: {fileID: 114223585555224422}
   - component: {fileID: 114490062596811362}
-  m_Layer: 0
+  - component: {fileID: 114579765360551252}
+  - component: {fileID: 114223585555224422}
+  m_Layer: 8
   m_Name: FPSController
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -438,6 +439,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a344c1292eaed5f42adccbbec690eaa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114579765360551252
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1956796706597622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef003f6e33e6bf42a78d9c447dbdc85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 25
+  fireRate: 0.5
+  range: 1000
+  Mask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!124 &124331245440216532
 Behaviour:
   m_ObjectHideFlags: 1
