@@ -22,4 +22,8 @@ public class Health : MonoBehaviour {
 	void Die(){
 		Destroy(gameObject);
 	}
+
+	public float getHealth(){
+		return currentHitPoints;
+	}
 }
