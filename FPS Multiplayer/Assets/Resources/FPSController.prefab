@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4076099286760562}
   - component: {fileID: 33597011239067566}
-  - component: {fileID: 65950409011787092}
   - component: {fileID: 23158160365178410}
+  - component: {fileID: 65437358673651312}
   m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
@@ -55,11 +55,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4393669820936184}
-  - component: {fileID: 54233593264250566}
   - component: {fileID: 143018438892175118}
   - component: {fileID: 114432844167037768}
   - component: {fileID: 82844175579225234}
   - component: {fileID: 114490062596811362}
+  - component: {fileID: 114995438920455708}
   - component: {fileID: 114579765360551252}
   - component: {fileID: 114223585555224422}
   m_Layer: 8
@@ -128,7 +128,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.6
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -186,22 +186,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1481118817533228}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54233593264250566
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1956796706597622}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!65 &65950409011787092
+--- !u!65 &65437358673651312
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -211,7 +196,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.0000001, y: 1.0000002, z: 1.0000004}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!81 &81061251967683418
 AudioListener:
@@ -315,7 +300,7 @@ MonoBehaviour:
   group: 0
   OwnerShipWasTransfered: 0
   prefixBackup: -1
-  synchronization: 3
+  synchronization: 1
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
@@ -445,19 +430,33 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1956796706597622}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ef003f6e33e6bf42a78d9c447dbdc85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 25
-  impact: 50
+  impact: 100
   range: 1000
-  fireRate: 0.5
-  impactEffect: {fileID: 0}
+  fireRate: 0.1
+  gunShot: {fileID: 8300000, guid: ae9816ad2dfbe0c4fba3ddc02976fb53, type: 3}
+  impactEffect: {fileID: 1649757771896188, guid: 3d0369fc361f63744bc2fa61c8baabff,
+    type: 2}
   Mask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114995438920455708
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1956796706597622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19504aed671752a48afe27630e5be587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHitPoints: 100
 --- !u!124 &124331245440216532
 Behaviour:
   m_ObjectHideFlags: 1

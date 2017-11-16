@@ -5,12 +5,13 @@ using UnityEngine;
 public class Health : MonoBehaviour {
 
 	public float maxHitPoints = 100f;
-	float currentHitPoints;
+	private float currentHitPoints;
 	// Use this for initialization
 	void Start () {
 		currentHitPoints = maxHitPoints;
 	}
 	
+	[PunRPC]
 	public void takeDamage(float dmg){
 		currentHitPoints -= dmg;
 		
@@ -20,7 +21,15 @@ public class Health : MonoBehaviour {
 	}
 
 	void Die(){
-		Destroy(gameObject);
+		Debug.Log("Dead");
+		if(GetComponent<PhotonView>().instantiationId==0) {
+			Destroy(gameObject);
+		}else{
+			if(GetComponent<PhotonView>().isMine){ 
+				Debug.Log("I AM MASTER");
+				PhotonNetwork.Destroy(gameObject);
+			}
+		}
 	}
 
 	public float getHealth(){

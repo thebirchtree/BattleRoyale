@@ -5,46 +5,57 @@ using UnityEngine;
 public class Shooting : MonoBehaviour
 {
 
-    public float damage = 25f;
+    public float damage = 5f;
     public float impact = 100f;
-    public float range = 5000f;
-    public float fireRate = 0.01f;
+    public float range = 250f;
+    public float fireRate = 0.1f;
+    private float nextFire = 0.0f;
 
+    AudioSource audioSource;
+    public AudioClip gunShot;
     public GameObject impactEffect;
     //private WaitForSeconds shotDuration = new WaitForSeconds(.07f);
-	public LayerMask Mask;
+	public LayerMask Mask;    
 
-    float cooldown = 0;
-
+    void Start() {
+        audioSource = GetComponent<AudioSource>();
+    }
     void Update()
     {
-        if (Input.GetButton("Fire1") && Time.time > cooldown)
+        if (Input.GetButtonDown("Fire1") && Time.time > nextFire) 
         {
-            Fire();
-            cooldown = Time.time + fireRate;
+            nextFire = Time.time + fireRate;
+            Fire();                
         }
     }
 
+    [PunRPC]
     void Fire()
     {       
-       RaycastHit hit;
+       RaycastHit hit;  
 
         if( Physics.Raycast( Camera.main.transform.position, Camera.main.transform.forward, out hit, range, Mask ) ){
             Health h = hit.collider.GetComponent<Health>();
+              Debug.Log(hit.transform.parent.name);
+             if(h == null && hit.transform.parent){          
+                
+                 h = hit.transform.parent.GetComponent<Health>();
+             }         
+
             if (h != null){
-                h.takeDamage (damage);
+                h.GetComponent<PhotonView>().RPC ("takeDamage", PhotonTargets.AllBuffered, damage);  //h.takeDamage (damage);               
                 Debug.Log("Health remainig: " + h.getHealth());
             }
-            if (hit.rigidbody != null){
-                Debug.Log("Move Bitch");
-                hit.rigidbody.AddForce ( -hit.normal * impact);
-            }
-            Instantiate(impactEffect, hit.point, Quaternion.LookRotation(-  hit.normal));
-        }
+            // if we want to use add force to the target, not using now because of MP.
+            // if (hit.rigidbody != null){ 
+            //     hit.rigidbody.AddForce ( -hit.normal * impact);
+            // }
+            audioSource.PlayOneShot(gunShot, 0.5F);
+            GameObject hitImpactFX = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(hitImpactFX, 1f);
+        }        
 
-        
-
-         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * range, Color.green, 0, true);
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * range, Color.green, 0, true);
 
         //For shoothing through objects, but for now easy.
         //RaycastHit[] hits = Physics.RaycastAll(Camera.main.transform.position, Camera.main.transform.forward, range, Mask);
@@ -55,5 +66,6 @@ public class Shooting : MonoBehaviour
         //     }
         // }       
     }
+
 
 }

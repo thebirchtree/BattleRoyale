@@ -42,4 +42,6 @@ MonoBehaviour:
   - RequestForPickupItems
   - RequestForPickupTimes
   - TaggedPlayer
+  - takeDamage
+  - Fire
   DisableAutoOpenWizard: 1
