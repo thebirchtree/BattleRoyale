@@ -44,4 +44,5 @@ MonoBehaviour:
   - TaggedPlayer
   - takeDamage
   - Fire
+  - BulletFX
   DisableAutoOpenWizard: 1
