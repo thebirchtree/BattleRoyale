@@ -13,7 +13,7 @@ public class Shooting : MonoBehaviour
 
     AudioSource audioSource;
     public AudioClip gunShot;
-    public GameObject impactEffect;
+ 
     //private WaitForSeconds shotDuration = new WaitForSeconds(.07f);
 	public LayerMask Mask;    
 
@@ -26,7 +26,7 @@ public class Shooting : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && Time.time > nextFire) 
+        if (Input.GetButton("Fire1") && Time.time > nextFire) 
         {
             nextFire = Time.time + fireRate;
             Fire();                
@@ -52,19 +52,17 @@ public class Shooting : MonoBehaviour
             }
 
             if (fxManager != null) {
-                Vector3 maxRangePoint = Camera.main.transform.position + (Camera.main.transform.forward * 100f);
-                fxManager.GetComponent<PhotonView>().RPC ("BulletFX", PhotonTargets.All,Camera.main.transform.position,maxRangePoint);
+                fxManager.GetComponent<PhotonView>().RPC ("BulletFX", PhotonTargets.All,Camera.main.transform.position,hit.point);
             }
             // if we want to use add force to the target, not using now because of MP.
             // if (hit.rigidbody != null){ 
             //     hit.rigidbody.AddForce ( -hit.normal * impact);
             // }
-            audioSource.PlayOneShot(gunShot, 0.5F);
-            GameObject hitImpactFX = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
-            Destroy(hitImpactFX, 1f);
+           //   audioSource.PlayOneShot(gunShot, 0.5F);           
         }else{
              if (fxManager != null) {
-                fxManager.GetComponent<PhotonView>().RPC ("BulletFX", PhotonTargets.All,Camera.main.transform.position,hit.point);
+                Vector3 maxRangePoint = Camera.main.transform.position + (Camera.main.transform.forward * 100f);
+                fxManager.GetComponent<PhotonView>().RPC ("BulletFX", PhotonTargets.All,Camera.main.transform.position,maxRangePoint);
             }
         }        
 

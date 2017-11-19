@@ -600,6 +600,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c65a1824b5f0e346bf5943b59c3865b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BulletSound: {fileID: 8300000, guid: ae9816ad2dfbe0c4fba3ddc02976fb53, type: 3}
+  impactEffect: {fileID: 1649757771896188, guid: 3d0369fc361f63744bc2fa61c8baabff,
+    type: 2}
 --- !u!114 &1115229406
 MonoBehaviour:
   m_ObjectHideFlags: 0
