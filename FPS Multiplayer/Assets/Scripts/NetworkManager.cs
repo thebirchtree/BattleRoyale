@@ -6,7 +6,7 @@ public class NetworkManager : Photon.MonoBehaviour {
 
 	public bool offlineMode = false;
 	public Camera OverviewCam; 
-
+	public float respawnTimer = 0;
 	string remoteLayerName = "RemotePlayer";
 	SpawnSpot[] spawnSpots;
 	// Use this for initialization
@@ -82,4 +82,16 @@ public class NetworkManager : Photon.MonoBehaviour {
 	void AssignRemoteLayer(){
 		gameObject.layer = LayerMask.NameToLayer (remoteLayerName);
 	}
+
+	void Update() {
+		if(respawnTimer > 0) {
+			respawnTimer -= Time.deltaTime;
+
+			if(respawnTimer <= 0) {
+				// Time to respawn the player!
+				SpawnMyPlayer();
+			}
+		}
+	}
+	
 }
